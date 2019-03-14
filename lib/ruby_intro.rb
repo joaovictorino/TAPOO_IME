@@ -3,25 +3,51 @@
 # Part 1
 
 def sum arr
-  # YOUR CODE HERE
+  result = 0
+  arr.each do |item|
+    result += item
+  end
+  
+  result
 end
 
 def max_2_sum arr
-  # YOUR CODE HERE
+  result = 0
+
+  if arr.any? and arr.length > 1
+    result = arr.max(2)[0] + arr.max(2)[1]
+  elsif arr.any? and arr.length == 1
+    result = arr[0]
+  end
+  
+  result
 end
 
 def sum_to_n? arr, n
-  # YOUR CODE HERE
+  result = false
+
+  if arr.length > 1
+    arr.each do |item|
+      arr.delete(item)
+      result = arr.include?(n - item)
+      arr.insert(item)
+      break if result
+    end
+  end
+  result
 end
 
 # Part 2
 
 def hello(name)
-  # YOUR CODE HERE
+  "Hello, " + name
 end
 
 def starts_with_consonant? s
-  # YOUR CODE HERE
+  if s.nil? or s.empty?
+    return false
+  end
+  s.downcase =~ /^[b-df-hj-np-tv-z].*/
 end
 
 def binary_multiple_of_4? s
@@ -31,5 +57,17 @@ end
 # Part 3
 
 class BookInStock
-# YOUR CODE HERE
+  attr_accessor :isbn, :price
+  def initialize(isbn, price)
+      if isbn.empty? or price <= 0
+        raise ArgumentError
+      end
+
+      @isbn = isbn
+      @price = price
+  end
+
+  def price_as_string
+    "$" + '%.2f' % @price
+  end
 end
