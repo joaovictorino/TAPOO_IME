@@ -7,18 +7,15 @@ def sum arr
   arr.each do |item|
     result += item
   end
-  
   result
 end
 
 def max_2_sum arr
   result = 0
-
-  if arr.any? and arr.length > 1
-    result = arr.max(2)[0] + arr.max(2)[1]
-  elsif arr.any? and arr.length == 1
-    result = arr[0]
-  end
+  
+  return arr.max(2)[0] + arr.max(2)[1] if arr.any? and arr.length > 1
+  
+  return arr[0] if arr.any? and arr.length == 1
   
   result
 end
@@ -44,22 +41,19 @@ def hello(name)
 end
 
 def starts_with_consonant? s
-  if s.nil? or s.empty?
-    return false
-  end
+  
+  return false if s.nil? or s.empty?
+
   s.downcase =~ /^[b-df-hj-np-tv-z].*/
 end
 
 def binary_multiple_of_4? s
-  if s.nil? or s.empty?
-    return false
-  end
-
-  if s =~ /^[01]+/
-    s.to_i(2) % 4 == 0
-  else
-    return false
-  end
+  
+  return false if s.nil? or s.empty?
+  
+  return s.to_i(2) % 4 == 0 if s =~ /^[01]+/
+    
+  return false
 end
 
 # Part 3
@@ -67,9 +61,7 @@ end
 class BookInStock
   attr_accessor :isbn, :price
   def initialize(isbn, price)
-      if isbn.empty? or price <= 0
-        raise ArgumentError
-      end
+      raise ArgumentError if isbn.empty? or price <= 0
 
       @isbn = isbn
       @price = price
